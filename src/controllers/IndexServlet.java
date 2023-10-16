@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import models.Message;
 import utils.DBUtil;
 
+import javax.servlet.RequestDispatcher;
+
 /**
  * Servlet implementation class IndexServlet
  */
@@ -36,6 +38,11 @@ public class IndexServlet extends HttpServlet {
         response.getWriter().append(Integer.valueOf(messages.size()).toString());
 
         em.close();
+
+        request.setAttribute("messages", messages);
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/index.jsp");
+        rd.forward(request, response);
     }
 
 }
